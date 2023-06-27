@@ -30,6 +30,13 @@ functions:
           path: /add
           method: post
     timeout: 60
+  getList:
+    handler: src/fetchList.handler
+    events:
+      - http:
+          path: /fetchList
+          method: get
+    timeout: 60
 
 resources:
   Resources:
