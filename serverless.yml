@@ -29,6 +29,7 @@ functions:
       - http:
           path: /add
           method: post
+    timeout: 60
 
 resources:
   Resources:
