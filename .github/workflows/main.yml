@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
 jobs:
   DeployServerless:
@@ -24,10 +25,19 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: NPM install
       run: npm install
-    - name: Serverless deployment
+    - name: Serverless deployment on prod
+      if: endsWith(github.ref, 'main')
       uses: serverless/github-action@master
       with:
         args: deploy --stage prod
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+    - name: Serverless deployment on dev
+      if: endsWith(github.ref, 'dev')
+      uses: serverless/github-action@master
+      with:
+        args: deploy --stage dev
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
