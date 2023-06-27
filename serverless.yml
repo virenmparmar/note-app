@@ -20,12 +20,16 @@ provider:
 functions:
   api:
     handler: src/index.handler
+    environment:
+      TABLE_NAME: !Ref ShoppingTable
     events:
       - http:
           path: /
           method: get
   addItem:
     handler: src/addItem.handler
+    environment:
+      TABLE_NAME: !Ref ShoppingTable
     events:
       - http:
           path: /add
@@ -33,6 +37,8 @@ functions:
     timeout: 30
   getList:
     handler: src/fetchList.handler
+    environment:
+      TABLE_NAME: !Ref ShoppingTable
     events:
       - http:
           path: /fetchList
@@ -40,6 +46,8 @@ functions:
     timeout: 30
   updateItem:
     handler: src/updateItem.handler
+    environment:
+      TABLE_NAME: !Ref ShoppingTable
     events:
       - http:
           path: /updateItem
@@ -47,6 +55,8 @@ functions:
     timeout: 30
   deleteItem:
     handler: src/deleteItem.handler
+    environment:
+      TABLE_NAME: !Ref ShoppingTable
     events:
       - http:
           path: /deleteItem

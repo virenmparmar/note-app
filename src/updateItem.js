@@ -2,7 +2,7 @@ import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { UpdateCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
-// import AWS from "aws-sdk";
+const TABLE_NAME = process.env.TABLE_NAME;
 
 const sendResponse = (code, data, message) => {
     return {
@@ -22,7 +22,7 @@ export const handler = async (event) => {
         var id = body.id;
         var item = body.item;
         const command = new UpdateCommand({
-        TableName: "ShoppingList",
+        TableName: TABLE_NAME,
         Key: {
             itemId: id
         },

@@ -3,6 +3,7 @@ import { DeleteCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
 // import AWS from "aws-sdk";
+const TABLE_NAME = process.env.TABLE_NAME;
 
 const sendResponse = (code, data, message) => {
     return {
@@ -21,7 +22,7 @@ export const handler = async (event) => {
         var body = JSON.parse(event.body);
         var id = body.id;
         const command = new DeleteCommand({
-        TableName: "ShoppingList",
+        TableName: TABLE_NAME,
         Key: {
             itemId: id
         }

@@ -1,10 +1,9 @@
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
 import { PutCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
-// const {"v4": uuidv4} = require('uuid');
 import { v4 as uuidv4 } from 'uuid';
 const client = new DynamoDBClient({});
 const docClient = DynamoDBDocumentClient.from(client);
-// import AWS from "aws-sdk";
+const TABLE_NAME = process.env.TABLE_NAME;
 
 const sendResponse = (code, data, message) => {
     return {
@@ -24,7 +23,7 @@ export const handler = async (event) => {
         var body = JSON.parse(event.body);
         const item = body.item;
         const command = new PutCommand({
-        TableName: "ShoppingList",
+        TableName: TABLE_NAME,
         Item: {
             itemId:  id,
             itemName:  item
