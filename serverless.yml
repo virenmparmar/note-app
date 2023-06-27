@@ -5,6 +5,7 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: us-east-1
+  stage: ${opt:stage, 'dev'}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -57,7 +58,7 @@ resources:
     ShoppingTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ShoppingList
+        TableName: ${opt:stage}-ShoppingList
         BillingMode: PAY_PER_REQUEST
         AttributeDefinitions:
           - AttributeName: itemId
