@@ -29,14 +29,28 @@ functions:
       - http:
           path: /add
           method: post
-    timeout: 60
+    timeout: 30
   getList:
     handler: src/fetchList.handler
     events:
       - http:
           path: /fetchList
           method: get
-    timeout: 60
+    timeout: 30
+  updateItem:
+    handler: src/updateItem.handler
+    events:
+      - http:
+          path: /updateItem
+          method: post
+    timeout: 30
+  deleteItem:
+    handler: src/deleteItem.handler
+    events:
+      - http:
+          path: /deleteItem
+          method: post
+    timeout: 30
 
 resources:
   Resources:
